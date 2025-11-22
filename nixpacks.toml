@@ -1,8 +1,8 @@
 [phases.setup]
-nixPkgs = ['...', 'maven']
+nixPkgs = ['maven', 'jdk17']
 
 [phases.build]
-cmds = ['mvn clean package -DskipTests -Dmaven.test.skip=true']
+cmds = ['mvn clean package -DskipTests']
 
 [start]
-cmd = 'java -Dserver.port=$PORT -Dspring.profiles.active=prod -jar target/*.jar'
+cmd = 'java -Dserver.port=$PORT -jar target/*.jar'
