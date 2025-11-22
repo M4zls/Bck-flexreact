@@ -1,0 +1,8 @@
+[phases.setup]
+nixPkgs = ['...', 'maven']
+
+[phases.build]
+cmds = ['mvn clean package -DskipTests -Dmaven.test.skip=true']
+
+[start]
+cmd = 'java -Dserver.port=$PORT -Dspring.profiles.active=prod -jar target/*.jar'
