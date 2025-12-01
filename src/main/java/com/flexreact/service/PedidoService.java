@@ -106,6 +106,26 @@ public class PedidoService {
         return pedidoRepository.save(pedido);
     }
     
+    @Transactional
+    public Pedido actualizar(UUID id, CrearPedidoRequest request) {
+        Pedido pedido = obtenerPorId(id);
+        
+        // Actualizar campos básicos
+        pedido.setTotal(request.getTotal());
+        pedido.setDireccionEnvio(request.getDireccionEnvio());
+        pedido.setMetodoPago(request.getMetodoPago());
+        
+        return pedidoRepository.save(pedido);
+    }
+    
+    @Transactional
+    public void eliminar(UUID id) {
+        if (!pedidoRepository.existsById(id)) {
+            throw new RuntimeException("Pedido no encontrado");
+        }
+        pedidoRepository.deleteById(id);
+    }
+    
     // Método para convertir entidad a DTO (evita problemas de serialización circular)
     public PedidoResponse convertToResponse(Pedido pedido) {
         return PedidoResponse.builder()

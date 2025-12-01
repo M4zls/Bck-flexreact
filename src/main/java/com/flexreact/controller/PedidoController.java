@@ -15,6 +15,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/pedidos")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class PedidoController {
     
     private final PedidoService pedidoService;
@@ -62,6 +63,26 @@ public class PedidoController {
             String estado = body.get("estado");
             Pedido pedido = pedidoService.actualizarEstado(id, estado);
             return ResponseEntity.ok(pedido);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    
+    @PutMapping("/{id}")
+    public ResponseEntity<Pedido> actualizar(@PathVariable UUID id, @RequestBody CrearPedidoRequest request) {
+        try {
+            Pedido pedido = pedidoService.actualizar(id, request);
+            return ResponseEntity.ok(pedido);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable UUID id) {
+        try {
+            pedidoService.eliminar(id);
+            return ResponseEntity.ok().build();
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
