@@ -33,7 +33,15 @@ public class AuthController {
     public ResponseEntity<?> registrarUsuario(@RequestBody ActualizarUsuarioRequest request) {
         try {
             UsuarioResponse usuario = usuarioService.crearUsuario(request);
-            return ResponseEntity.ok(usuario);
+            
+            // Generar token JWT para iniciar sesión automáticamente
+            String token = jwtUtil.generateToken(usuario.getId(), usuario.getEmail());
+            
+            Map<String, Object> response = new HashMap<>();
+            response.put("token", token);
+            response.put("usuario", usuario);
+            
+            return ResponseEntity.ok(response);
         } catch (RuntimeException e) {
             Map<String, String> error = new HashMap<>();
             error.put("error", e.getMessage());
