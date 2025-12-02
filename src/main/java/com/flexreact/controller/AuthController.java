@@ -6,6 +6,10 @@ import com.flexreact.entity.Usuario;
 import com.flexreact.repository.UsuarioRepository;
 import com.flexreact.security.JwtUtil;
 import com.flexreact.service.UsuarioService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
+@Tag(name = "Autenticación", description = "API de autenticación y registro de usuarios")
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
@@ -29,6 +34,12 @@ public class AuthController {
     /**
      * POST /api/auth/register - Registrar un nuevo usuario (compatibilidad)
      */
+    @Operation(summary = "Registrar nuevo usuario", 
+               description = "Crea una nueva cuenta de usuario y devuelve un token JWT")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Usuario registrado exitosamente"),
+        @ApiResponse(responseCode = "400", description = "Datos de registro inválidos")
+    })
     @PostMapping("/register")
     public ResponseEntity<?> registrarUsuario(@RequestBody ActualizarUsuarioRequest request) {
         try {
@@ -56,6 +67,12 @@ public class AuthController {
     /**
      * POST /api/auth/login - Iniciar sesión
      */
+    @Operation(summary = "Iniciar sesión", 
+               description = "Autentica un usuario y devuelve un token JWT")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Login exitoso"),
+        @ApiResponse(responseCode = "401", description = "Credenciales inválidas")
+    })
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> credentials) {
         try {

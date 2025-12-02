@@ -1,6 +1,7 @@
 C:\Users\twinz\OneDrive\Escritorio\Bck-flexreact\src\main\java\com\flexreact\FlexreactApplication.java
 C:\Users\twinz\OneDrive\Escritorio\Bck-flexreact\src\main\java\com\flexreact\security\JwtUtil.java
 C:\Users\twinz\OneDrive\Escritorio\Bck-flexreact\src\main\java\com\flexreact\service\UsuarioService.java
+C:\Users\twinz\OneDrive\Escritorio\Bck-flexreact\src\main\java\com\flexreact\config\OpenApiConfig.java
 C:\Users\twinz\OneDrive\Escritorio\Bck-flexreact\src\main\java\com\flexreact\dto\UsuarioResponse.java
 C:\Users\twinz\OneDrive\Escritorio\Bck-flexreact\src\main\java\com\flexreact\entity\Producto.java
 C:\Users\twinz\OneDrive\Escritorio\Bck-flexreact\src\main\java\com\flexreact\entity\Usuario.java
@@ -19,4 +20,5 @@ C:\Users\twinz\OneDrive\Escritorio\Bck-flexreact\src\main\java\com\flexreact\ent
 C:\Users\twinz\OneDrive\Escritorio\Bck-flexreact\src\main\java\com\flexreact\service\ProductoService.java
 C:\Users\twinz\OneDrive\Escritorio\Bck-flexreact\src\main\java\com\flexreact\repository\ItemPedidoRepository.java
 C:\Users\twinz\OneDrive\Escritorio\Bck-flexreact\src\main\java\com\flexreact\repository\UsuarioRepository.java
+C:\Users\twinz\OneDrive\Escritorio\Bck-flexreact\src\main\java\com\flexreact\controller\AuthController.java
 C:\Users\twinz\OneDrive\Escritorio\Bck-flexreact\src\main\java\com\flexreact\controller\PedidoController.java
