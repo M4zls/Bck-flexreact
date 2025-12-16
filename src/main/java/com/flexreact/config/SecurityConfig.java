@@ -59,10 +59,14 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         // Permitir múltiples orígenes separados por coma
-        List<String> origins = Arrays.asList(allowedOrigins.split(","));
-        configuration.setAllowedOrigins(origins);
+        String[] originsArray = allowedOrigins.split(",");
+        for (int i = 0; i < originsArray.length; i++) {
+            originsArray[i] = originsArray[i].trim();
+        }
+        configuration.setAllowedOrigins(Arrays.asList(originsArray));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setExposedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
         configuration.setMaxAge(3600L);
         
