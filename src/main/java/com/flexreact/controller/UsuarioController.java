@@ -4,6 +4,10 @@ import com.flexreact.dto.ActualizarUsuarioRequest;
 import com.flexreact.dto.UsuarioResponse;
 import com.flexreact.entity.Pedido;
 import com.flexreact.service.UsuarioService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+@Tag(name = "Usuarios", description = "API de gestión de usuarios")
 @RestController
 @RequestMapping("/api/usuarios")
 @RequiredArgsConstructor
@@ -25,6 +30,12 @@ public class UsuarioController {
     /**
      * POST /api/usuarios - Crear un nuevo usuario
      */
+    @Operation(summary = "Crear nuevo usuario", 
+               description = "Crea un nuevo usuario en el sistema")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Usuario creado exitosamente"),
+        @ApiResponse(responseCode = "400", description = "Datos inválidos")
+    })
     @PostMapping
     public ResponseEntity<?> crearUsuario(@RequestBody ActualizarUsuarioRequest request) {
         try {
@@ -44,6 +55,9 @@ public class UsuarioController {
     /**
      * GET /api/usuarios - Obtener todos los usuarios
      */
+    @Operation(summary = "Obtener todos los usuarios", 
+               description = "Retorna la lista completa de usuarios registrados")
+    @ApiResponse(responseCode = "200", description = "Lista de usuarios obtenida exitosamente")
     @GetMapping
     public ResponseEntity<List<UsuarioResponse>> obtenerTodosLosUsuarios() {
         try {

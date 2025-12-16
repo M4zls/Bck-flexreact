@@ -2,6 +2,11 @@ package com.flexreact.controller;
 
 import com.flexreact.entity.Producto;
 import com.flexreact.service.ProductoService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
+@Tag(name = "Productos", description = "API de gestión de productos")
 @RestController
 @RequestMapping("/api/productos")
 @RequiredArgsConstructor
@@ -17,14 +23,24 @@ public class ProductoController {
     
     private final ProductoService productoService;
     
+    @Operation(summary = "Obtener todos los productos", 
+               description = "Retorna la lista completa de productos disponibles")
+    @ApiResponse(responseCode = "200", description = "Lista de productos obtenida exitosamente")
     @GetMapping
     public ResponseEntity<List<Producto>> obtenerTodos() {
         List<Producto> productos = productoService.obtenerTodos();
         return ResponseEntity.ok(productos);
     }
     
+    @Operation(summary = "Obtener producto por ID", 
+               description = "Retorna un producto específico según su ID")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Producto encontrado"),
+        @ApiResponse(responseCode = "404", description = "Producto no encontrado")
+    })
     @GetMapping("/{id}")
-    public ResponseEntity<Producto> obtenerPorId(@PathVariable UUID id) {
+    public ResponseEntity<Producto> obtenerPorId(
+            @Parameter(description = "ID del producto") @PathVariable UUID id) {
         try {
             Producto producto = productoService.obtenerPorId(id);
             return ResponseEntity.ok(producto);
