@@ -26,7 +26,7 @@ public class PagoRequest {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class ProductoPago {
-        private Long productoId;
+        private String productoId;
         private String nombre;
         private String descripcion;
         private String imagenUrl;

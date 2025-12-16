@@ -39,7 +39,7 @@ public class MercadoPagoService {
             
             for (PagoRequest.ProductoPago producto : request.getProductos()) {
                 PreferenceItemRequest item = PreferenceItemRequest.builder()
-                        .id(producto.getProductoId() != null ? producto.getProductoId().toString() : null)
+                        .id(producto.getProductoId())
                         .title(producto.getNombre())
                         .description(producto.getDescripcion())
                         .pictureUrl(producto.getImagenUrl())
