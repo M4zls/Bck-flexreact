@@ -69,7 +69,17 @@ public class MercadoPagoService {
             }
             
             // URLs de retorno (ajusta según tu frontend)
-            String frontendUrl = allowedOrigins.split(",")[0]; // Toma la primera URL permitida
+            String frontendUrl = allowedOrigins.split(",")[0].trim(); // Toma la primera URL y limpia espacios
+            
+            // Si frontendUrl es localhost, usar la segunda URL (producción)
+            if (frontendUrl.contains("localhost")) {
+                String[] origins = allowedOrigins.split(",");
+                if (origins.length > 1) {
+                    frontendUrl = origins[1].trim();
+                }
+            }
+            
+            log.info("Usando URL de retorno: {}", frontendUrl);
             
             PreferenceBackUrlsRequest backUrls = PreferenceBackUrlsRequest.builder()
                     .success(frontendUrl + "/pago/success")
