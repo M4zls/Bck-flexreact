@@ -20,6 +20,7 @@ public class PagoRequest {
     private List<ProductoPago> productos;
     private DatosComprador comprador;
     private String pedidoId;
+    private String returnUrl;
     
     @Data
     @Builder
